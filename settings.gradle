@@ -1,0 +1,3 @@
+rootProject.name='7_30_Work'
+include ':app'
+include ':project'
