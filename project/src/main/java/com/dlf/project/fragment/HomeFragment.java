@@ -64,9 +64,5 @@ public class HomeFragment extends Fragment implements FuliView {
 
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
 
-    }
 }

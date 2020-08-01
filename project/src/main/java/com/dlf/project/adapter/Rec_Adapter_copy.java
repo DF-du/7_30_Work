@@ -17,16 +17,15 @@ import com.dlf.project.bean.FuliBean;
 import com.dlf.project.sql.MySQLite;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class Rec_Adapter extends RecyclerView.Adapter<Rec_Adapter.ViewHolder> {
+public class Rec_Adapter_copy extends RecyclerView.Adapter<Rec_Adapter_copy.ViewHolder> {
     private Context context;
     private ArrayList<FuliBean.ResultsBean> resultsBeans;
 
-    public Rec_Adapter(Context context, ArrayList<FuliBean.ResultsBean> resultsBeans) {
+    public Rec_Adapter_copy(Context context, ArrayList<FuliBean.ResultsBean> resultsBeans) {
         this.context = context;
         this.resultsBeans = resultsBeans;
     }
@@ -43,34 +42,6 @@ public class Rec_Adapter extends RecyclerView.Adapter<Rec_Adapter.ViewHolder> {
         FuliBean.ResultsBean bean = resultsBeans.get(position);
         holder.title.setText(bean.getDesc());
         Glide.with(context).load(bean.getUrl()).into(holder.url);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FuliBean.ResultsBean bean1 = resultsBeans.get(position);
-                MySQLite sqLite = new MySQLite(context);
-                List<FuliBean.ResultsBean> list = sqLite.queryAll();
-                List<String> ids = new ArrayList<>();
-                for (int i = 0; i < list.size(); i++) {
-                    ids.add(list.get(i).get_id());
-                }
-                if (ids.contains(bean1.get_id())){
-                    Toast.makeText(context, "插入失败，已存在", Toast.LENGTH_SHORT).show();
-                }else {
-                    sqLite.inserts(bean1);
-                    Toast.makeText(context, "插入成功", Toast.LENGTH_SHORT).show();
-                }
-                // 逐个进行判断 会不断吐司 进行比较
-              /*  for (int i = 0; i < list.size(); i++) {
-                     if (list.get(i).get_id().equals(bean1.get_id())){
-                         Toast.makeText(context, "插入失败，已存在", Toast.LENGTH_SHORT).show();
-                    }else {
-                         sqLite.inserts(bean1);
-                         Toast.makeText(context, "插入成功", Toast.LENGTH_SHORT).show();
-                     }
-                }*/
-            }
-        });
     }
 
     @Override
